@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "autoprefixer": "10.4.5",
+        "jquery": "^3.6.0",
+        "popper.js": "^1.16.1",
         "vue-router": "^3.3.4"
     }
 }
