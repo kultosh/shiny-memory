@@ -5372,60 +5372,12 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
-
-      return false;
-      var addAnswer = true;
-
-      if (selectedBox) {
-        this.boxes.find(function (box) {
-          if (box.id === selectedBox.id) {}
-        });
-        this.boxes.map(function (answer, index) {
-          var temp = answer.value;
-          _this.boxes[index].value = param;
-
-          _this.lists.filter(function (data, index) {
-            if (data.value == temp) {
-              _this.lists[index].selected = true;
-            }
-          });
-        });
-      }
-
-      this.boxes.map(function (answer, index) {
-        if (answer.value == "" && addAnswer && answer.selected == false) {
-          addAnswer = false;
-          _this.boxes[index].value = param;
-
-          _this.lists.filter(function (data, index) {
-            if (data.value == param) {
-              // this.lists.splice(index, 1);
-              _this.lists[index].selected = true;
-            }
-          });
-        } else if (answer.selected) {
-          var temp = answer.value;
-          _this.boxes[index].value = param;
-
-          _this.lists.filter(function (data, index) {
-            if (data.value == temp) {
-              _this.lists[index].selected = true;
-            }
-          });
-        }
-      });
     },
     selectBox: function selectBox(id) {
       this.boxes.find(function (box) {
         box.selected = box.id === id ? true : false;
       });
-      this.chooseOneClick = false; // this.boxes.map((box, index) => {
-      //     if(box.id === id) {
-      //         this.boxes[index].selected = true;
-      //     } else {
-      //         this.boxes[index].selected = false;
-      //     }
-      // })
+      this.chooseOneClick = false;
     },
     selectedList: function selectedList(param) {
       this.lists.find(function (list) {
