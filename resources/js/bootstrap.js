@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 window._ = require('lodash');
 
 try {
