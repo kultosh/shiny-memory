@@ -61,59 +61,12 @@
                         }
                     })
                 }
-                return false;
-                let addAnswer = true;
-                if(selectedBox) {
-                    this.boxes.find(box => {
-                        if(box.id === selectedBox.id) {
-                            
-                        }
-                    })
-                    this.boxes.map((answer,index) => {
-                        const temp = answer.value;
-                        this.boxes[index].value = param;
-                        this.lists.filter((data, index) => {
-                            if(data.value == temp) {
-                                this.lists[index].selected = true;
-                            }
-                        })
-                    })
-                }
-                this.boxes.map((answer,index) => {
-                    if(answer.value == "" && addAnswer && answer.selected == false) {
-                        addAnswer = false;
-                        this.boxes[index].value = param;
-                        this.lists.filter((data, index) => {
-                            if(data.value == param) {
-                                // this.lists.splice(index, 1);
-                                this.lists[index].selected = true;
-                            }
-                        })
-                    } else if(answer.selected) {
-                        const temp = answer.value;
-                        this.boxes[index].value = param;
-                        this.lists.filter((data, index) => {
-                            if(data.value == temp) {
-                                this.lists[index].selected = true;
-                            }
-                        })
-                    }
-                })
             },
             selectBox(id) {
                 this.boxes.find(box => {
                     box.selected = (box.id === id) ? true : false
                 });
                 this.chooseOneClick = false;
-
-                // this.boxes.map((box, index) => {
-                //     if(box.id === id) {
-                //         this.boxes[index].selected = true;
-
-                //     } else {
-                //         this.boxes[index].selected = false;
-                //     }
-                // })
             },
             selectedList(param) {
                 this.lists.find(list => {
