@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Home from './pages/Home.vue';
 import Level from './pages/Level.vue';
+import ShinyMemory from './pages/ShinyMemory';
+import MultiCalculation from './pages/MultiCalculation';
 
 Vue.use(VueRouter);
 
@@ -10,15 +11,20 @@ const router = new VueRouter({
     mode: 'history',
     linkExactActiveClass: 'active',
     routes: [
-        // {
-        //     path: '/',
-        //     name: 'home',
-        //     component: Home
-        // },
+        {
+            path: '/old',
+            name: 'old',
+            component: Level
+        },
+        {
+            path: '/multiple-operator',
+            name: 'multipleOperator',
+            component: MultiCalculation
+        },
         {
             path: '/',
             name: 'level',
-            component: Level
+            component: ShinyMemory
         }
     ]
 });

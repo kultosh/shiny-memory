@@ -7,6 +7,8 @@
             </div>
         </div>
 
+        <Calculation boxData="boxes" />
+
         <div class="row justify-content-md-center mt-5">
             <div class="col-1 p-3 border text-white text-center" v-for="(list) in lists" :key="list.id" :class="list.selected ? `bg-success` : `bg-secondary`"><span @click="selectAnswer(list.id)" :style="list.selected ? 'cursor:not-allowed' : 'cursor:pointer'">{{list.value}}</span></div>
         </div>
@@ -14,7 +16,11 @@
 </template>
 
 <script>
+    import Calculation from './Calculation.vue';
     export default {
+        components: {
+            Calculation,
+        },
         data() {
             return {
                 'lists': [

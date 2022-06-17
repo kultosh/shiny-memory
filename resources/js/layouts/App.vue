@@ -14,28 +14,37 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <router-link
-                class="nav-link"
-                data-toggle="collapse"
-                :to="{ name: 'home' }"
-              >
-                Home
-              </router-link>
-            </li>
             <li class="nav-item">
               <router-link
                 class="nav-link"
                 data-toggle="collapse"
                 :to="{ name: 'level' }"
               >
-                Level
+                Add
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                class="nav-link"
+                data-toggle="collapse"
+                :to="{ name: 'multipleOperator' }"
+              >
+                Multiple
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                class="nav-link"
+                data-toggle="collapse"
+                :to="{ name: 'old' }"
+              >
+                Old
               </router-link>
             </li>
           </ul>
-        </div> -->
+        </div>
       </div>
     </nav>
 
