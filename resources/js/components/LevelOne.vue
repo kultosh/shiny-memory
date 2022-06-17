@@ -3,12 +3,12 @@
         <h2 class="text-secondary text-center mt-2 mb-5">Level One</h2>
         <div class="row justify-content-md-center">
             <div class="col-md-3" v-for="(box) in boxes" :key="box.id">
-                <input type="text" size="2" style="line-height:70px;width: 100px; float: left" class="text-center input-lg form-control text-white" v-model="box.value" :class="box.value ? `bg-success` : `bg-primary`" readonly @click="selectBox(box.id)"><span class="col-1 display-4" style="padding-left: 60px" v-if="box.id < 4">+</span>
+                <input type="text" size="2" style="line-height:70px;width: 100px; float: left" class="text-center input-lg form-control text-white" v-model="box.value" :class="box.value ? `bg-success` : `bg-primary`" readonly @click="selectBox(box.id,box.value)"><span class="col-1 display-4" style="padding-left: 60px" v-if="box.id < 4">+</span>
             </div>
         </div>
 
         <div class="row justify-content-md-center mt-5">
-            <div class="col-1 p-3 border text-white text-center" v-for="(list) in lists" :key="list.id" :class="list.selected ? `bg-success` : `bg-secondary`"><span @click="selectAnswer(list.id)" style="cursor:pointer">{{list.value}}</span></div>
+            <div class="col-1 p-3 border text-white text-center" v-for="(list) in lists" :key="list.id" :class="list.selected ? `bg-success` : `bg-secondary`"><span @click="selectAnswer(list.id)" :style="list.selected ? 'cursor:not-allowed' : 'cursor:pointer'">{{list.value}}</span></div>
         </div>
     </div>
 </template>
@@ -46,8 +46,15 @@
                 if(!this.chooseOneClick) {
                     this.boxes.find(box => {
                         if(box.selected === true) {
+                            const previousValue = box.value;
                             box.value = param;
                             box.selected = false;
+                            this.lists.find(list => {
+                                if(list.value == previousValue) {
+                                    list.selected = false;
+                                    return true;
+                                }   
+                            })
                             this.selectedList(param);
                         }
                     });
@@ -62,11 +69,28 @@
                     })
                 }
             },
-            selectBox(id) {
+            selectBox(id,boxValue) {
+               if(!this.chooseOneClick) {
+                    var tempValue = '';
+                    this.boxes.find((box) => {
+                        if(box.selected) {
+                            tempValue = box.value;
+                            box.value = boxValue;
+                            return true;
+                        }
+                    });
+                    this.boxes.find(box => {
+                        if(box.id == id) {
+                            box.value = tempValue;
+                        }
+                    })
+                    this.chooseOneClick = true;
+               } else {
                 this.boxes.find(box => {
                     box.selected = (box.id === id) ? true : false
                 });
                 this.chooseOneClick = false;
+               }
             },
             selectedList(param) {
                 this.lists.find(list => {

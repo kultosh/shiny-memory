@@ -5354,8 +5354,16 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.chooseOneClick) {
         this.boxes.find(function (box) {
           if (box.selected === true) {
+            var previousValue = box.value;
             box.value = param;
             box.selected = false;
+
+            _this.lists.find(function (list) {
+              if (list.value == previousValue) {
+                list.selected = false;
+                return true;
+              }
+            });
 
             _this.selectedList(param);
           }
@@ -5373,11 +5381,28 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    selectBox: function selectBox(id) {
-      this.boxes.find(function (box) {
-        box.selected = box.id === id ? true : false;
-      });
-      this.chooseOneClick = false;
+    selectBox: function selectBox(id, boxValue) {
+      if (!this.chooseOneClick) {
+        var tempValue = '';
+        this.boxes.find(function (box) {
+          if (box.selected) {
+            tempValue = box.value;
+            box.value = boxValue;
+            return true;
+          }
+        });
+        this.boxes.find(function (box) {
+          if (box.id == id) {
+            box.value = tempValue;
+          }
+        });
+        this.chooseOneClick = true;
+      } else {
+        this.boxes.find(function (box) {
+          box.selected = box.id === id ? true : false;
+        });
+        this.chooseOneClick = false;
+      }
     },
     selectedList: function selectedList(param) {
       this.lists.find(function (list) {
@@ -28824,7 +28849,7 @@ var render = function () {
             domProps: { value: box.value },
             on: {
               click: function ($event) {
-                return _vm.selectBox(box.id)
+                return _vm.selectBox(box.id, box.value)
               },
               input: function ($event) {
                 if ($event.target.composing) {
@@ -28864,7 +28889,7 @@ var render = function () {
             _c(
               "span",
               {
-                staticStyle: { cursor: "pointer" },
+                style: list.selected ? "cursor:not-allowed" : "cursor:pointer",
                 on: {
                   click: function ($event) {
                     return _vm.selectAnswer(list.id)
