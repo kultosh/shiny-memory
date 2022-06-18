@@ -5759,7 +5759,7 @@ __webpack_require__.r(__webpack_exports__);
         value: '+'
       }, {
         id: 2,
-        value: '-'
+        value: '/'
       }, {
         id: 3,
         value: '*'
