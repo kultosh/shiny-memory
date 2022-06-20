@@ -10,10 +10,7 @@
     <meta name="author" content="shiny-memory">
     <title>Shiny Memory</title>
     
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
         .container-sm {
             position: absolute;
@@ -129,9 +126,6 @@
         </div>
     </div>
 
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
