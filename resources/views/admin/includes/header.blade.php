@@ -25,3 +25,8 @@
         </li>
     </ul>
 </nav>
+<div class="row">
+    <div class="col-md-12">
+        <span class="float-right pr-3">@include('admin.layouts.message')</span>
+    </div>
+</div>

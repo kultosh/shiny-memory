@@ -21,7 +21,7 @@
                 data-accordion="false">
 
                 <li class="nav-item menu">
-                    <a href="#" class="nav-link active">
+                    <a href="{{route('dashboard')}}" class="nav-link {{Request::is('admin/dashboard') ? 'active':''}}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -29,7 +29,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item menu-close">
+                <li class="nav-item {{Request::is('admin/level*') || Request::is('admin/add-level') ? 'menu-open':'menu-close'}}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fab fa-delicious"></i>
                         <p>
@@ -39,13 +39,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-plus nav-icon"></i>
+                            <a href="{{route('level.create')}}" class="nav-link {{Request::is('admin/add-level') ? 'active':''}}">
+                                <i class="fa fa-plus nav-icon"></i>
                                 <p>Add Level</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('level.index')}}" class="nav-link {{Request::is('admin/level*') ? 'active' : ''}}">
                                 <i class="far fa-eye nav-icon"></i>
                                 <p>View Level</p>
                             </a>
@@ -62,13 +62,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-plus nav-icon"></i>
+                            <a href="{{route('operator.create')}}" class="nav-link">
+                                <i class="fa fa-plus nav-icon"></i>
                                 <p>Add Operator</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('operator.index')}}" class="nav-link">
                                 <i class="far fa-eye nav-icon"></i>
                                 <p>View Operator</p>
                             </a>
@@ -85,13 +85,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-plus nav-icon"></i>
+                            <a href="{{route('answer.create')}}" class="nav-link">
+                                <i class="fa fa-plus nav-icon"></i>
                                 <p>Add Answer</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('answer.index')}}" class="nav-link">
                                 <i class="far fa-eye nav-icon"></i>
                                 <p>View Answer</p>
                             </a>
