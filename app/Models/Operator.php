@@ -10,4 +10,5 @@ class Operator extends Model
     use HasFactory;
 
     protected $fillable = ['type','status'];
+    protected $hidden = ['pivot'];
 }
