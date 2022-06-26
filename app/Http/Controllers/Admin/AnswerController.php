@@ -103,7 +103,7 @@ class AnswerController extends Controller
         $list = [];
         foreach($request->answer as $index => $answer)
         {
-            $list[$index]['value'] = $answer;
+            $list[$index]['value'] = (int) $answer;
             $list[$index]['selected'] = ($request->select_answer == ($index+1)) ? true : false; 
             $ranges = array_diff($ranges, array($answer));
         }
