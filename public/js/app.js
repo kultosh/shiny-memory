@@ -5298,7 +5298,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Calculation_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Calculation.vue */ "./resources/js/components/Calculation.vue");
 //
 //
 //
@@ -5320,46 +5319,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    Calculation: _Calculation_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   data: function data() {
     return {
-      'lists': [{
-        id: 1,
-        value: 1,
-        selected: false
-      }, {
-        id: 2,
-        value: 2,
-        selected: false
-      }, {
-        id: 3,
-        value: 3,
-        selected: false
-      }, {
-        id: 4,
-        value: 4,
-        selected: false
-      }, {
-        id: 5,
-        value: 5,
-        selected: false
-      }, {
-        id: 6,
-        value: 6,
-        selected: false
-      }, {
-        id: 7,
-        value: 7,
-        selected: false
-      }, {
-        id: 10,
-        value: 10,
-        selected: false
-      }],
+      'lists': [],
       'boxes': [{
         id: 1,
         value: "",
@@ -5379,87 +5356,57 @@ __webpack_require__.r(__webpack_exports__);
       }],
       'operators': [{
         id: 1,
-        value: '+'
+        type: '+'
       }, {
         id: 2,
-        value: '+'
+        type: '+'
       }, {
         id: 3,
-        value: '+'
+        type: '+'
       }],
       chooseOneClick: true,
       calculatedValue: 0
     };
   },
+  created: function created() {
+    var _this = this;
+
+    var slug = 'one';
+    axios.get("api/level/".concat(slug)).then(function (res) {
+      _this.lists = res.data.data.list;
+      _this.operators = res.data.data.operator.operators;
+    });
+  },
   methods: {
     selectAnswer: function selectAnswer(param) {
-      var _this = this;
+      var _this2 = this;
 
       this.boxes.find(function (box, index) {
         if (box.value == "") {
           box.value = param;
 
-          _this.selectedList(param); // if(index > 0) {
-          //     switch(this.operators[index-1].value)
-          //     {
-          //         case '+':
-          //             return this.calculatedValue = this.calculatedValue + param;
-          //         case '-':
-          //             return this.calculatedValue = this.calculatedValue - param;
-          //         case '*':
-          //             return this.calculatedValue = this.calculatedValue * param;
-          //         case '/':
-          //             return this.calculatedValue = this.calculatedValue / param;
-          //     }
-          // } else {
-          //     this.calculatedValue = param;
-          // }
+          _this2.selectedList(param);
 
-
-          _this.calculateValue(index, param);
+          if (index === 3) {
+            _this2.calculatedValue = eval(_this2.boxes[0].value + _this2.operators[0].type + _this2.boxes[1].value + _this2.operators[1].type + _this2.boxes[2].value + _this2.operators[2].type + _this2.boxes[3].value);
+          }
 
           return true;
         }
       });
     },
     selectBox: function selectBox(index) {
-      var _this2 = this;
+      var _this3 = this;
 
       var i = index;
-      var j = 0;
 
       for (i; i < 4; i++) {
         this.lists.find(function (list) {
-          if (list.value == _this2.boxes[i].value) {
+          if (list.value == _this3.boxes[i].value) {
             return list.selected = false;
           }
         });
         this.boxes[i].value = "";
-      }
-
-      if (index !== 0) {
-        for (j; j < index; j++) {
-          this.calculateValue(j, this.boxes[j].value); // if(j > 0) {
-          //     switch(this.operators[j-1].value)
-          //     {
-          //         case '+':
-          //             this.calculatedValue = this.calculatedValue + this.boxes[j].value;
-          //             break;
-          //         case '-':
-          //             this.calculatedValue = this.calculatedValue - this.boxes[j].value;
-          //             break;
-          //         case '*':
-          //             this.calculatedValue = this.calculatedValue * this.boxes[j].value;
-          //             break;
-          //         case '/':
-          //             this.calculatedValue = this.calculatedValue / this.boxes[j].value;
-          //             break;
-          //     }
-          // } else {
-          //     this.calculatedValue = this.boxes[j].value;
-          // }
-        }
-      } else {
         this.calculatedValue = 0;
       }
     },
@@ -5470,25 +5417,6 @@ __webpack_require__.r(__webpack_exports__);
           return true;
         }
       });
-    },
-    calculateValue: function calculateValue(index, selectedValue) {
-      if (index > 0) {
-        switch (this.operators[index - 1].value) {
-          case '+':
-            return this.calculatedValue = this.calculatedValue + selectedValue;
-
-          case '-':
-            return this.calculatedValue = this.calculatedValue - selectedValue;
-
-          case '*':
-            return this.calculatedValue = this.calculatedValue * selectedValue;
-
-          case '/':
-            return this.calculatedValue = this.calculatedValue / selectedValue;
-        }
-      } else {
-        this.calculatedValue = selectedValue;
-      }
     }
   }
 });
@@ -29613,102 +29541,143 @@ var render = function () {
       _vm._v("Addition"),
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row justify-content-md-center" },
-      _vm._l(_vm.boxes, function (box, index) {
-        return _c("div", { key: box.id, staticClass: "col-md-3" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: box.value,
-                expression: "box.value",
-              },
-            ],
-            staticClass: "text-center input-lg form-control text-white",
-            class: box.value ? "bg-success" : "bg-primary",
-            staticStyle: {
-              "line-height": "70px",
-              width: "100px",
-              float: "left",
-            },
-            attrs: { type: "text", size: "2", readonly: "" },
-            domProps: { value: box.value },
-            on: {
-              click: function ($event) {
-                return _vm.selectBox(index)
-              },
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(box, "value", $event.target.value)
-              },
-            },
-          }),
-          box.id < 4
-            ? _c(
-                "span",
-                {
-                  staticClass: "col-1 display-4",
-                  staticStyle: { "padding-left": "60px" },
-                },
-                [_vm._v(_vm._s(_vm.operators[index].value))]
-              )
-            : _vm._e(),
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-md-center" }, [
-      _c("div", { staticClass: "col-md-3 offset-2 mt-4" }, [
-        _c("h4", [_vm._v(_vm._s(_vm.calculatedValue))]),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row justify-content-md-center mt-5" },
-      _vm._l(_vm.lists, function (list) {
-        return _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !list.selected,
-                expression: "!list.selected",
-              },
-            ],
-            key: list.id,
-            staticClass: "col-1 p-3 border text-white text-center",
-            class: list.selected ? "bg-success" : "bg-secondary",
-          },
-          [
-            _c(
-              "span",
-              {
-                style: list.selected ? "cursor:not-allowed" : "cursor:pointer",
-                on: {
-                  click: function ($event) {
-                    return _vm.selectAnswer(list.value)
+    _vm.calculatedValue != 100
+      ? _c("div", [
+          _c(
+            "div",
+            { staticClass: "row justify-content-md-center" },
+            _vm._l(_vm.boxes, function (box, index) {
+              return _c("div", { key: box.id, staticClass: "col-md-3" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: box.value,
+                      expression: "box.value",
+                    },
+                  ],
+                  staticClass: "text-center input-lg form-control text-white",
+                  class: box.value ? "bg-success" : "bg-primary",
+                  staticStyle: {
+                    "line-height": "70px",
+                    width: "100px",
+                    float: "left",
                   },
+                  attrs: { type: "text", size: "2", readonly: "" },
+                  domProps: { value: box.value },
+                  on: {
+                    click: function ($event) {
+                      return _vm.selectBox(index)
+                    },
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(box, "value", $event.target.value)
+                    },
+                  },
+                }),
+                box.id < 4
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "col-1 display-4",
+                        staticStyle: { "padding-left": "60px" },
+                      },
+                      [_vm._v(_vm._s(_vm.operators[index].type))]
+                    )
+                  : _vm._e(),
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "row justify-content-md-center" }, [
+            _c("div", { staticClass: "col-md-3 offset-2 mt-4" }, [
+              _c("h4", { staticClass: "text-secondary" }, [
+                _vm._v(_vm._s(_vm.calculatedValue)),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "row justify-content-md-center mt-5" },
+            _vm._l(_vm.lists, function (list) {
+              return _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !list.selected,
+                      expression: "!list.selected",
+                    },
+                  ],
+                  key: list.value,
+                  staticClass: "col-1 p-3 border text-white text-center",
+                  class: list.selected ? "bg-success" : "bg-secondary",
                 },
-              },
-              [_vm._v(_vm._s(list.value))]
-            ),
-          ]
-        )
-      }),
-      0
-    ),
+                [
+                  _c(
+                    "span",
+                    {
+                      style: list.selected
+                        ? "cursor:not-allowed"
+                        : "cursor:pointer",
+                      on: {
+                        click: function ($event) {
+                          return _vm.selectAnswer(list.value)
+                        },
+                      },
+                    },
+                    [_vm._v(_vm._s(list.value))]
+                  ),
+                ]
+              )
+            }),
+            0
+          ),
+        ])
+      : _c("div", [
+          _c("h2", { staticClass: "text-success text-center" }, [
+            _vm._v("Congratulation!!"),
+          ]),
+          _vm._v(" "),
+          _c("p"),
+          _c("h1", { staticClass: "text-success text-center" }, [
+            _vm._v("100"),
+          ]),
+          _c("p"),
+          _vm._v(" "),
+          _vm._m(0),
+        ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("button", { staticClass: "btn btn-primary" }, [
+          _vm._v("Play Again"),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("span", { staticStyle: { float: "right" } }, [
+          _c("button", { staticClass: "btn btn-warning" }, [
+            _vm._v("Next Level"),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
